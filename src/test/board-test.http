@@ -1,0 +1,12 @@
+### create board
+POST http://localhost:8080/api/organizations/2/boards
+Authorization: Bearer {{auth-token}}
+Content-Type: application/json
+
+{
+  "title": "board"
+}
+
+### delete board
+DELETE http://localhost:8080/api/organizations/2/boards/3
+Authorization: Bearer {{auth-token}}

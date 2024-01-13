@@ -1,0 +1,20 @@
+### sign up
+POST http://localhost:8080/api/auth/sign-up
+Content-Type: application/json
+
+{
+  "email" : "email1",
+  "password": "password",
+
+  "name" : "name",
+  "surname" : "surname"
+}
+
+### sign in
+POST http://localhost:8080/api/auth/sign-in
+Content-Type: application/json
+
+{
+  "email" : "email",
+  "password": "password"
+}

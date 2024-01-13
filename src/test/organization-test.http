@@ -1,0 +1,55 @@
+
+### organization create
+PUT http://localhost:8080/api/organizations
+Authorization: Bearer {{auth-token}}
+Content-Type: application/json
+
+{
+  "title": "title"
+}
+
+### organization edit
+PATCH http://localhost:8080/api/organizations/1
+Authorization: Bearer {{auth-token}}
+Content-Type: application/json
+
+{
+  "title": "title"
+}
+
+### organization add member
+PATCH http://localhost:8080/api/organizations/members/add
+Authorization: Bearer {{auth-token}}
+Content-Type: application/json
+
+{
+  "organizationId": 1,
+  "memberEmail": "email1"
+}
+
+### organization remove member
+PATCH http://localhost:8080/api/organizations/members/remove
+Authorization: Bearer {{auth-token}}
+Content-Type: application/json
+
+{
+  "organizationId": 1,
+  "memberEmail": "email1"
+}
+
+### organization find organization members
+GET http://localhost:8080/api/organizations/2/members
+Authorization: Bearer {{auth-token}}
+
+### organization find my
+GET http://localhost:8080/api/organizations/my
+Authorization: Bearer {{auth-token}}
+
+### organization find my created
+GET http://localhost:8080/api/organizations/my/created
+Authorization: Bearer {{auth-token}}
+
+### delete organization
+DELETE http://localhost:8080/api/organizations/1
+Authorization: Bearer {{auth-token}}
+
