@@ -47,7 +47,8 @@ public class OrganizationController {
                         .builder()
                         .organizationId(organizationId)
                         .memberEmail(email)
-                        .build()
+                        .build(),
+                email + " is now a member of your organization"
         );
     }
 
@@ -60,8 +61,9 @@ public class OrganizationController {
                         .builder()
                         .organizationId(organizationId)
                         .memberEmail(email)
-                        .build()
-                );
+                        .build(),
+                email + " is no longer a member of your organization"
+        );
     }
 
     @PatchMapping("{organizationId}")
@@ -71,11 +73,11 @@ public class OrganizationController {
         return ServerResponseRunner.safeRun(organizationService::save, request);
     }
 
-
     @PutMapping
     public ServerResponse<OrganizationResponseDto> save(@RequestBody OrganizationRequestDto request) {
         request.setId(null);
-        return ServerResponseRunner.safeRun(organizationService::save, request);
+        return ServerResponseRunner.safeRun(organizationService::save, request,
+                "Organization " + request.getTitle().toUpperCase() + " created");
     }
 
     @DeleteMapping("{organizationId}")

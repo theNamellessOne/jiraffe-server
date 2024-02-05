@@ -44,6 +44,10 @@ public class UserService extends GenericEntityService<User, UserRequestDto, User
 
     @Override
     protected User preprocessEntitySave(User entity) {
+        if (this.findByEmail(entity.getEmail()).isPresent()) {
+            throw new RuntimeException("User with email " + entity.getEmail() + " already exists");
+        }
+
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return super.preprocessEntitySave(entity);
     }

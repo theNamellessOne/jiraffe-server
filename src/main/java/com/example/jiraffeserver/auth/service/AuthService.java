@@ -2,6 +2,7 @@ package com.example.jiraffeserver.auth.service;
 
 import com.example.jiraffeserver.auth.dto.AuthResponse;
 import com.example.jiraffeserver.auth.dto.SignInRequest;
+import com.example.jiraffeserver.auth.dto.SignUpRequest;
 import com.example.jiraffeserver.auth.dto.ValidateRequest;
 import com.example.jiraffeserver.jwt.service.JwtService;
 import com.example.jiraffeserver.user.dto.UserRequestDto;
@@ -21,8 +22,14 @@ public class AuthService {
     private final UserResponseMapper userResponseMapper;
     private final AuthenticationManager authenticationManager;
 
-    public AuthResponse signUp(UserRequestDto request) {
-        var userRecorded = userService.save(request);
+    public AuthResponse signUp(SignUpRequest request) {
+        var userRecorded = userService.save(UserRequestDto.builder()
+                .email(request.getEmail())
+                .name(request.getName())
+                .surname(request.getSurname())
+                .password(request.getPassword())
+                .imageUrl(request.getImageUrl())
+                .build());
 
         if (userRecorded == null) {
             return new AuthResponse("Persistence failed", null);

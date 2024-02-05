@@ -6,12 +6,16 @@ import java.util.function.Function;
 
 public class ServerResponseRunner {
     public static <A, T> ServerResponse<T> safeRun(Function<A, T> function, A args) {
+        return ServerResponseRunner.safeRun(function, args, "");
+    }
+
+    public static <A, T> ServerResponse<T> safeRun(Function<A, T> function, A args, String successMsg) {
         ServerResponse<T> serverResponse;
 
         try {
             T data = function.apply(args);
             serverResponse = ServerResponse.<T>builder()
-                    .msg("")
+                    .msg(successMsg)
                     .data(data)
                     .status(HttpStatus.OK)
                     .build();
@@ -25,7 +29,7 @@ public class ServerResponseRunner {
             }
 
             serverResponse = ServerResponse.<T>builder()
-                    .msg(e.getMessage())
+                    .msg(e.getLocalizedMessage())
                     .data(null)
                     .status(status)
                     .build();
